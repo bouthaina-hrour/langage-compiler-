@@ -1,0 +1,11 @@
+code
+int a
+string text = "text"
+
+output a
+a = input "your number"
+
+repeat 10 times
+output a
+end
+endcode
