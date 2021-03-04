@@ -12,19 +12,32 @@ int main(){
         detecter_erreur(ERR_FICH_VID);
     }
     
-    // while (Car_Cour != EOF)
-    // {
+    //LEXER
+    printf("******************** Analyseur lexical *********************\n");
+    while (Car_Cour != EOF){
        Sym_Suiv();
        AfficherToken(sym_cour);
-       prog();
-    // }
+    }  
+    printf("******************** Analyseur lexical *********************\n");
+    fclose(Fichier);
     
-    // if(sym_cour.CODE==FIN_TOKEN){
-    //     printf("bravo le programme est correct");
+    Fichier = fopen("programme_pascal.txt","r");
+    if(Fichier == NULL){
+        printf("Fichier non trouvé \n");
+        exit(EXIT_FAILURE);
+    }
 
-    // }else{
-    //     printf("pas bravo:le programme est incorrect!!!");
-    // }
+    Car_Cour = lire_Car();
+    if (Car_Cour == EOF){
+        detecter_erreur(ERR_FICH_VID);
+    }
+    //PARSER
+    printf("******************** Analyseur syntaxique *********************\n");   
+    Sym_Suiv();
+    AfficherToken(sym_cour);
+    prog();
+    printf("******************** Analyseur syntaxique *********************\n");
+  
 }
 
 

@@ -38,6 +38,7 @@ void insts(){
 }
 
 inst(){
+    AfficherToken(sym_cour);
 
     switch (sym_cour.CODE){
         case IF_TOKEN:
@@ -71,10 +72,12 @@ void si(){
     cond();
     inst();
     if(sym_cour.CODE == ELSEIF_TOKEN){
+        Sym_Suiv();
         cond();
         inst();
     }
     if(sym_cour.CODE == ELSE_TOKEN){
+        Sym_Suiv();
         inst();
     }
     Test_Symbole(END_TOKEN, END_ERR);   
@@ -89,22 +92,24 @@ void cond(){
            expr();
     }
     else {
+        AfficherToken(sym_cour);
         detecter_erreur(IF_ERR);
     }
 }
 
 void expr(){
-    switch (sym_cour.CODE)
-    {
-    case TEXT_TOKEN:
-        concat();
-        break;
-    case ID_TOKEN:
-    case INTEGER_TOKEN:
-    case NUMBER_TOKEN:
-        arith();
-    default:
-        printf("erreur dans la regle expr \n"); exit(EXIT_FAILURE);
+    printf("expr >> "); AfficherToken(sym_cour);
+    switch (sym_cour.CODE){
+        case TEXT_TOKEN:
+            concat();
+            break;
+        case ID_TOKEN:
+        case INTEGER_TOKEN:
+        case NUMBER_TOKEN:
+            arith();
+            break;
+        default:
+            printf("erreur dans la regle expr \n"); exit(EXIT_FAILURE);
     }
 }
 
@@ -157,9 +162,9 @@ void repeter(){
         case ID_TOKEN:
         case INTEGER_TOKEN:
         case COMPUTE_TOKEN:
-            Sym_Suiv();
             arith();
             Test_Symbole(TIMES_TOKEN, TIMES_ERR);
+            inst();
             break;
     }
 

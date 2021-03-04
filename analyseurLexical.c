@@ -52,8 +52,6 @@ void lire_nombre(){
 
 }
 
-
-
 void lire_mot(){
     char* mot=(char*)malloc(sizeof(char));
     int mot_cle_size = sizeof(mot_cle)/sizeof(mot_cle[0]);
@@ -122,7 +120,7 @@ void lire_mot(){
 
 }
 void lire_commnentaire(){
-  sym_cour.CODE = COM_TOKEN;
+  //sym_cour.CODE = COM_TOKEN; escape comments
 	do{
 		Car_Cour=lire_Car();
 	 }while(Car_Cour!='\n');

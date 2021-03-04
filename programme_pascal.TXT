@@ -5,7 +5,17 @@ string text = "text"
 output a
 a = input "your number"
 
-repeat 10 times
-output a
+com repeat 14 times
+com output 2
+com END
+
+
+if a + 6 gt 8 
+output "greater than"
+elseif a + 6 lt 8
+output "less than"
+else
+output "equal" 
 end
+
 endcode
