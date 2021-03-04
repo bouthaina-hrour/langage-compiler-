@@ -13,7 +13,9 @@ SI’ :{elseif COND INST}|else INST |eps
 COND : EXPR OPCOMP  EXPR
 
 EXPR : ARITH | CONCAT
+
 ARITH : TERM { ADDOP TERM }
+
 TERM :FACT {MULOP FACT}
 
 OPCOMP : = | not= | lt |gt |lt=|gt=
@@ -35,6 +37,7 @@ REPETER’ : REPETER” INST
 REPETER”:ARITH times |while COND |until COND 
 
 ECRIRE : output ALL
+
 ALL : FACT | CONCAT | bool 
 
 Lire : input TEXT
@@ -51,9 +54,7 @@ MAX : max ARITH and ARITH
 
 DECLARE : TYPE AFFEC
 
-COMMENT : com TEXT’  \n
-
-
+COMMENT : com TEXT’  
 
 BOOLEAN : true | false 
 
@@ -66,7 +67,9 @@ CHIFFRE : 0|...|9
 LETTRE : a|...|z|A|...|Z
 
 CONCAT : TEXT {+ CONCAT'}
+
 CONCAT' : id | TEXT
+
 TEXT: “ TEXT’ “ 
 
 TEXT’ : {LETTTRE {LETTTRE | CHIFFRE} | CHIFFRE {LETTTRE | CHIFFRE}}
