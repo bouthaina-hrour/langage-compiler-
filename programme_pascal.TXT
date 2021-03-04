@@ -1,19 +1,23 @@
 code
 int a
 string text = "text"
+int s = "test" + text
 
 output a
 a = input "your number"
 
-com repeat 14 times
-com output 2
-com END
+repeat 14 times
+output 2 output 8
+END
 
 
 if a + 6 gt 8 
 output "greater than"
+output a
 elseif a + 6 lt 8
 output "less than"
+int concat = "test" + text
+output concat
 else
 output "equal" 
 end

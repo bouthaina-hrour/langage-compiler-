@@ -75,15 +75,15 @@ inst(){
 void si(){
     Test_Symbole(IF_TOKEN, IF_ERR);
     cond();
-    inst();
+    insts();
     if(sym_cour.CODE == ELSEIF_TOKEN){
         Sym_Suiv();
         cond();
-        inst();
+        insts();
     }
     if(sym_cour.CODE == ELSE_TOKEN){
         Sym_Suiv();
-        inst();
+        insts();
     }
     Test_Symbole(END_TOKEN, END_ERR);   
 }
@@ -157,19 +157,19 @@ void repeter(){
         case WHILE_TOKEN:
             Sym_Suiv();
             cond();
-            inst();
+            insts();
             break;
         case UNTIL_TOKEN:
             Sym_Suiv();
             cond();
-            inst();
+            insts();
             break;
         case ID_TOKEN:
         case INTEGER_TOKEN:
         case COMPUTE_TOKEN:
             arith();
             Test_Symbole(TIMES_TOKEN, TIMES_ERR);
-            inst();
+            insts();
             break;
     }
 
@@ -241,6 +241,7 @@ void fct(){
 }
 
 void concat(){
+    // printf("concat >> "); printf(sym_cour.NOM);
     Test_Symbole(TEXT_TOKEN, TEXT_ERR);
     while(sym_cour.CODE == PLUS_TOKEN){
         Sym_Suiv();
