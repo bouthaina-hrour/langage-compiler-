@@ -120,7 +120,7 @@ void lire_mot(){
 
 }
 void lire_commnentaire(){
-  //sym_cour.CODE = COM_TOKEN; escape comments
+  sym_cour.CODE = COM_TOKEN; //escape comments
 	do{
 		Car_Cour=lire_Car();
 	 }while(Car_Cour!='\n');

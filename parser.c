@@ -27,12 +27,17 @@ void prog(){
 void insts(){
 
     while (sym_cour.CODE == IF_TOKEN || sym_cour.CODE == REPEAT_TOKEN ||
-           sym_cour.CODE == OUTPUT_TOKEN ||
+           sym_cour.CODE == OUTPUT_TOKEN || sym_cour.CODE == COM_TOKEN ||
            sym_cour.CODE == NUM_TOKEN || sym_cour.CODE == INT_TOKEN ||
            sym_cour.CODE == BOOL_TOKEN || sym_cour.CODE == STRING_TOKEN ||
            sym_cour.CODE == ID_TOKEN)
     {
-        inst();
+        if(sym_cour.CODE != COM_TOKEN) {
+            inst();
+        }else {
+            Sym_Suiv();
+        }
+        
     }
     
 }
