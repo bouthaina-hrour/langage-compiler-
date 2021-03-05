@@ -32,6 +32,7 @@ void lire_nombre(){
             integer[i]=Car_Cour;
         }while(Car_Cour>='0'&& Car_Cour<='9');
         if(Car_Cour==' '||Car_Cour=='\t' || Car_Cour=='\n' || Car_Cour=='+'||Car_Cour=='*'||Car_Cour=='-'||Car_Cour=='/'){
+            if (Car_Cour=='\n') numLigne++;
                 ungetc(Car_Cour,Fichier);
                 sym_cour.CODE=NUMBER_TOKEN;
                 strcpy(sym_cour.NOM,integer); //number
@@ -41,7 +42,7 @@ void lire_nombre(){
     }
 
     else if(Car_Cour==' '||Car_Cour=='\t' || Car_Cour=='\n' || Car_Cour=='+'||Car_Cour=='*'||Car_Cour=='-'||Car_Cour=='/'){
-
+        if (Car_Cour=='\n') numLigne++;
         sym_cour.CODE=INTEGER_TOKEN;
         strcpy(sym_cour.NOM,integer); //integer
     }else{
@@ -123,6 +124,7 @@ void lire_commnentaire(){
 	do{
 		Car_Cour=lire_Car();
 	 }while(Car_Cour!='\n');
+     numLigne++;
 }
 void lire_string(){
 

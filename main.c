@@ -3,7 +3,7 @@
 int main(){
     Fichier = fopen("test2.txt","r");
     if(Fichier == NULL){
-        printf("Fichier non trouvé \n");
+        printf("Fichier non trouvï¿½ \n");
         exit(EXIT_FAILURE);
     }
 
@@ -23,7 +23,7 @@ int main(){
     numLigne=1;
     Fichier = fopen("test2.txt","r");
     if(Fichier == NULL){
-        printf("Fichier non trouvé \n");
+        printf("Fichier non trouvï¿½ \n");
         exit(EXIT_FAILURE);
     }
 
@@ -32,11 +32,11 @@ int main(){
         detecter_erreur(ERR_FICH_VID);
     }
     //PARSER
-    printf("******************** Analyseur syntaxique et sematique *********************\n");
+    printf("******************** Analyseur syntaxique et semantique *********************\n");
     Sym_Suiv();
     prog();
     if(sym_cour.CODE==FIN_TOKEN){
-       printf("\n bravo le programme est syntaxiquement correcte\n ");
+       printf("\n bravo le programme est syntaxiquement et sÃ©mantiquement correcte\n ");
 
    }else{
       printf("\n pas bravo:le programme est syntaxiquement erronee!!!\n ");}}
