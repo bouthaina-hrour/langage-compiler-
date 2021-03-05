@@ -1,6 +1,4 @@
-
 #include "header.h"
-
 void AfficherToken(TSym_Cour sym_cour){
     printf("%s\n",Token[sym_cour.CODE]);
 }
@@ -25,33 +23,32 @@ void lire_nombre(){
          Car_Cour=lire_Car();
          integer[i]=Car_Cour;
    }while(Car_Cour>='0'&& Car_Cour<='9');
-      if(Car_Cour=='.'){
+
+    if(Car_Cour=='.'){
         integer[i]=Car_Cour;
-      do{
-         i++;
-         Car_Cour=lire_Car();
-         integer[i]=Car_Cour;
-       }while(Car_Cour>='0'&& Car_Cour<='9');
-          if(Car_Cour==' '||Car_Cour=='\t' || Car_Cour=='\n' || Car_Cour=='+'||Car_Cour=='*'||Car_Cour=='-'||Car_Cour=='/'){
-           ungetc(Car_Cour,Fichier);
-           sym_cour.CODE=NUMBER_TOKEN;
-           strcpy(sym_cour.NOM,integer);
-       }else{
-              sym_cour.CODE=ERREUR_TOKEN;
-          }
+        do{
+            i++;
+            Car_Cour=lire_Car();
+            integer[i]=Car_Cour;
+        }while(Car_Cour>='0'&& Car_Cour<='9');
+        if(Car_Cour==' '||Car_Cour=='\t' || Car_Cour=='\n' || Car_Cour=='+'||Car_Cour=='*'||Car_Cour=='-'||Car_Cour=='/'){
+                ungetc(Car_Cour,Fichier);
+                sym_cour.CODE=NUMBER_TOKEN;
+                strcpy(sym_cour.NOM,integer); //number
+        }else{
+                sym_cour.CODE=ERREUR_TOKEN;
+        }
+    }
 
-       }
-       else if(Car_Cour==' '||Car_Cour=='\t' || Car_Cour=='\n' || Car_Cour=='+'||Car_Cour=='*'||Car_Cour=='-'||Car_Cour=='/'){
+    else if(Car_Cour==' '||Car_Cour=='\t' || Car_Cour=='\n' || Car_Cour=='+'||Car_Cour=='*'||Car_Cour=='-'||Car_Cour=='/'){
 
-           sym_cour.CODE=INTEGER_TOKEN;
-           strcpy(sym_cour.NOM,integer);
-      }else{
-              sym_cour.CODE=ERREUR_TOKEN;
-          }
+        sym_cour.CODE=INTEGER_TOKEN;
+        strcpy(sym_cour.NOM,integer); //integer
+    }else{
+            sym_cour.CODE=ERREUR_TOKEN;
+    }
 
-       }
-
-
+}
 
 void lire_mot(){
     char* mot=(char*)malloc(sizeof(char));
@@ -74,23 +71,23 @@ void lire_mot(){
     bool est_mot_cle=false;
 
     while(j<mot_cle_size ) {
-        if( strcmpi(mot,mot_cle[j])==0){
+        if( strcmp(mot,mot_cle[j])==0){
             est_mot_cle=true;
-              if(strcmpi(mot_cle[j],"lt")==0){
+                if(strcmp(mot_cle[j],"lt")==0){
                   Car_Cour=lire_Car();
                   if(Car_Cour=='=')
                     sym_cour.CODE=INFEG_TOKEN;
                   else{
                     ungetc(Car_Cour,Fichier);
                     sym_cour.CODE=j;}
-                }else  if(strcmpi(mot_cle[j],"gt")==0){
+                }else  if(strcmp(mot_cle[j],"gt")==0){
                      Car_Cour=lire_Car();
                     if(Car_Cour=='=')
                         sym_cour.CODE=SUPEG_TOKEN;
                     else {
                         ungetc(Car_Cour,Fichier);
                         sym_cour.CODE=j;}
-                }else if (strcmpi(mot_cle[j],"not")==0){
+                }else if (strcmp(mot_cle[j],"not")==0){
                         Car_Cour=lire_Car();
                     if(Car_Cour=='=')
                         sym_cour.CODE=j;
@@ -98,7 +95,7 @@ void lire_mot(){
                         ungetc(Car_Cour,Fichier);
                         sym_cour.CODE=ERREUR_TOKEN;
                         }
-                }else if (strcmpi(mot_cle[j],"com")==0){
+                }else if (strcmp(mot_cle[j],"com")==0){
 
                     lire_commnentaire();
                 }
@@ -122,7 +119,7 @@ void lire_mot(){
 
 }
 void lire_commnentaire(){
-  sym_cour.CODE = COM_TOKEN;
+  sym_cour.CODE = COM_TOKEN; //escape comments
 	do{
 		Car_Cour=lire_Car();
 	 }while(Car_Cour!='\n');
@@ -135,15 +132,15 @@ void lire_string(){
 
 	}while( Car_Cour!='"' && Car_Cour!=EOF);
    if(Car_Cour=='"'){
-       sym_cour.CODE=STRING_TOKEN;
+       sym_cour.CODE=TEXT_TOKEN;
    }else{
         sym_cour.CODE=ERREUR_TOKEN;
    }
 }
 void Sym_Suiv(){
-
-
    while(Car_Cour=='\t' || Car_Cour==' ' || Car_Cour=='\n'){
+        if(Car_Cour=='\n') {numLigne++;
+       }
         Car_Cour=lire_Car();
    }
 
@@ -198,32 +195,3 @@ void Sym_Suiv(){
    }
    Car_Cour=lire_Car();
    }
-
-
-
-
-
-
-
-
-
-
-int main()
-{
-Fichier=NULL;
- Fichier=fopen("test00.txt","r");
-
-
-if(Fichier!=NULL){
-
-  Car_Cour=lire_Car();
-  while(Car_Cour!=EOF){
-      Sym_Suiv();
-     AfficherToken(sym_cour);
-
-}
-    return 1;
-
-}
-
-}
